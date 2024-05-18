@@ -17,6 +17,9 @@ def calcular(expressao):
 
 def novo(novo_texto):
         if novo_texto == "=":
+                if "0/0" in mudar_texto.get():
+                        calculo=0.0
+                        mudar_texto.set(calculo)
                 if "/" in mudar_texto.get() or "+" in mudar_texto.get() or "-" in mudar_texto.get() or "x" in mudar_texto.get():
                         expressao = mudar_texto.get().replace('x', '*').replace(',', '.')
                         resultado = calcular(expressao)
@@ -63,6 +66,7 @@ def novo(novo_texto):
                 else:
                         mudar_texto.set(mudar_texto.get() + novo_texto)
 
+#-----------------------------------------------------------------------------------
 criar_espaco = Label(janela, width=36, height=6, padx=10, textvariable=mudar_texto, relief=FLAT, bg="lightblue")
 criar_espaco.grid(row=0,column=0, columnspan=4)
 for numero in range(0,10):
