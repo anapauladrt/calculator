@@ -2,18 +2,32 @@ from tkinter import*
 janela=Tk()
 mudar_texto=StringVar()
 lista=[]
+
 def botoes(numero):
         return Button(janela, text=str(numero), command=lambda: novo(str(numero)), width=6,height=4, padx=10, bg="lightgreen")
 
+
+def calcular(expressao):
+        if 1:
+                resultado = eval(expressao)
+                return resultado
+        else:
+                resultado = "Erro"
+
+
 def novo(novo_texto):
         if novo_texto == "=":
+                if "/" in mudar_texto.get() or "+" in mudar_texto.get() or "-" in mudar_texto.get() or "x" in mudar_texto.get():
+                        expressao = mudar_texto.get().replace('x', '*').replace(',', '.')
+                        resultado = calcular(expressao)
+                        mudar_texto.set(resultado)
                 if "/" in mudar_texto.get():
                         lado = mudar_texto.get().split("/")
                         if len(lado) == 2:
                                 lado1 = float(lado[0])
                                 lado2 = float(lado[1])
                                 resultado = lado1 / lado2
-                                mudar_texto.set(str(resultado))
+                                mudar_texto.set(resultado)
                         else:
                                 mudar_texto.set("Apenas um calculo simples por vez")
                 if "+" in mudar_texto.get():
@@ -22,7 +36,7 @@ def novo(novo_texto):
                                 lado1=float(lado[0])
                                 lado2=float(lado[1])
                                 resultado=lado1+lado2
-                                mudar_texto.set(str(resultado))
+                                mudar_texto.set(resultado)
                         else:
                                 mudar_texto.set("Apenas um calculo simples por vez")
                 if "-" in mudar_texto.get():
@@ -31,18 +45,13 @@ def novo(novo_texto):
                                 lado1=float(lado[0])
                                 lado2=float(lado[1])
                                 resultado=lado1-lado2
-                                mudar_texto.set(str(resultado))
+                                mudar_texto.set(resultado)
                         else:
                                 mudar_texto.set("Apenas um calculo simples por vez")
                 if "x" in mudar_texto.get():
-                        lado=mudar_texto.get().split("x")
-                        if len(lado)==2:
-                                lado1=float(lado[0])
-                                lado2=float(lado[1])
-                                resultado=lado1*lado2
-                                mudar_texto.set(str(resultado))
-                        else:
-                                mudar_texto.set("Apenas um calculo simples por vez")    
+                        expressao = mudar_texto.get().replace('x', '*').replace(',', '.')
+                        resultado = calcular(expressao)
+                        mudar_texto.set(resultado)
         else:
                                 
                 if "," in mudar_texto.get():
@@ -54,7 +63,6 @@ def novo(novo_texto):
                 else:
                         mudar_texto.set(mudar_texto.get() + novo_texto)
 
-#-----------------------------------------------------------------------------------
 criar_espaco = Label(janela, width=36, height=6, padx=10, textvariable=mudar_texto, relief=FLAT, bg="lightblue")
 criar_espaco.grid(row=0,column=0, columnspan=4)
 for numero in range(0,10):
@@ -84,6 +92,6 @@ janela.geometry("280x447")
 janela.resizable(0,0)
 janela.state("zoomed")
 janela.state("iconic")
-janela.iconphoto(0,PhotoImage(file="C:\\Users\\Júlia\\Desktop\\tkinter\\icone.img\\icon.png"))
-janela['background']="lightpink"
+janela.iconphoto(0,PhotoImage(file="C:\\Users\\Júlia\\Desktop\\Nova pasta (2)\\calculadora.png"))
+janela['background']="green"
 janela.mainloop()
